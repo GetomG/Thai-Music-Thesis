@@ -238,7 +238,41 @@ File I/O and data serialization.
 **Key Functions**:
 - `save_json_bar_per_line(data, filepath)`: Save JSON with each bar on separate line (for diffs)
 
-### 8. **midi_ranad.py**
+### 8. **compact_json_format.py**
+Reformats Thai music JSON files to the compact **per-bar style** — one bar per line, นำ/ตาม dict items inline. Idempotent: safe to run on already-compact files.
+
+**Usage**:
+```bash
+# Single file
+python3 thai_music_utils/compact_json_format.py --file thai_music_data/songs/ลาว/ลาวดำเนินทราย/json/ลาวดำเนินทราย_manual.json
+
+# All songs in one motif folder
+python3 thai_music_utils/compact_json_format.py --motif ลาว
+
+# Every JSON in the entire songs/ directory
+python3 thai_music_utils/compact_json_format.py --all
+```
+
+**Before** (expanded, one slot per line):
+```json
+"bars": [
+  [
+    "----",
+    "----",
+    "ดํรํดํล",
+    "-ซ-ม"
+  ]
+]
+```
+
+**After** (compact, one bar per line):
+```json
+"bars": [
+  [ "----", "----", "ดํรํดํล", "-ซ-ม" ]
+]
+```
+
+### 9. **midi_ranad.py**
 MIDI generation with Ranad (Thai xylophone) instrument configuration.
 
 **Key Functions**:
